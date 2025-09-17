@@ -1,0 +1,12 @@
+# Node modules
+node_modules/
+
+# Docker
+.DS_Store
+.env
+.idea
+*.log
+npm-debug.log*
+
+# Other OS files
+.vscode/
