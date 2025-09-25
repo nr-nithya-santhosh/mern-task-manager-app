@@ -20,7 +20,10 @@ services:
       - MONGO_URI=mongodb://mongodb:27017/my_mern_app
 
   frontend:
-    build: ./task-manager
+    build:
+      context: ./task-manager
+      args:
+        REACT_APP_API_URL: http://localhost:5000
     container_name: mern-frontend
     ports:
       - "80:80"

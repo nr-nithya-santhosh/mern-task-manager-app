@@ -7,7 +7,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
+  const API_URL = process.env.REACT_APP_API_URL || '';
+  
   useEffect(() => {
     axios.get('http://localhost:5000/api/tasks')
       .then(response => {

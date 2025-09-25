@@ -1,0 +1,31 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: backend-service
+# spec:
+#   selector:
+#     app: mern-backend
+#   ports:
+#     - protocol: TCP
+#       port: 5000
+#       targetPort: 5000
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  # --- START OF NEW SECTION ---
+  # This annotation tells the Ingress controller to use the health check
+  # named 'mern-backend-health-check' from the other file.
+  annotations:
+    cloud.google.com/backend-config: '{"default": "mern-backend-health-check"}'
+  # --- END OF NEW SECTION ---
+spec:
+  # NodePort required for GCE Ingress  
+  type: NodePort
+  selector:
+    app: mern-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
