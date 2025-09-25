@@ -1,0 +1,28 @@
+# This file defines health checks for the Google Cloud Load Balancer.
+# It contains two separate configurations, one for the frontend and one for the backend.
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  # This is the health check for the frontend.
+  name: mern-frontend-health-check
+spec:
+  healthCheck:
+    # It will send a request to the root path ("/") on port 80.
+    # Your frontend must return a 200 OK status to be considered healthy.
+    requestPath: /
+    port: 80
+    type: HTTP
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  # This is the health check for the backend.
+  name: mern-backend-health-check
+spec:
+  healthCheck:
+    # It will send a request to the root path ("/") on port 5000.
+    # Your backend API must return a 200 OK status to be considered healthy.
+    # If you have a specific health endpoint like /api/health, change this path.
+    requestPath: /
+    port: 5000
+    type: HTTP

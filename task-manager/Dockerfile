@@ -1,7 +1,15 @@
 # client/Dockerfile
 # Stage 1: Build the React app
 FROM node:18-alpine as build
+
+# This ARG will receive the value from the docker build command
+ARG REACT_APP_API_URL
+
 WORKDIR /app
+
+# Set the environment variable for the build
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 COPY package*.json ./
 RUN npm install
 COPY . .
