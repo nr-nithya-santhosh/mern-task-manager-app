@@ -8,9 +8,8 @@ function App() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const API_URL = process.env.REACT_APP_API_URL || '';
-  
   useEffect(() => {
-    axios.get('http://localhost:5000/api/tasks')
+    axios.get(`${API_URL}/api/tasks`)
       .then(response => {
         setTasks(response.data);
       })
@@ -21,7 +20,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/tasks', { title, description })
+    axios.post(`${API_URL}/api/tasks`, { title, description })
       .then(response => {
         setTasks([...tasks, response.data]);
         setTitle('');
